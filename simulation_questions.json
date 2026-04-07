@@ -1,0 +1,85 @@
+{
+  "title": "SimPy queue simulation — verified Q&A",
+  "model_notes": "Exponential interarrivals and service times; Resource capacity = clerks. Metrics match main.py: a customer is counted once they acquire a clerk (wait time ends). Utilization = sum of sampled service durations for those customers / (NUM_CLERKS * SIM_TIME).",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Using RANDOM_SEED 42, NUM_CLERKS 2, SIM_TIME 120, MEAN_INTERARRIVAL 4, and MEAN_SERVICE 6 (same model as main.py), how many customers begin service before the clock reaches SIM_TIME?",
+      "parameters": {
+        "RANDOM_SEED": 42,
+        "NUM_CLERKS": 2,
+        "SIM_TIME": 120.0,
+        "MEAN_INTERARRIVAL": 4.0,
+        "MEAN_SERVICE": 6.0
+      },
+      "answer": "32 customers begin service.",
+      "answer_numeric": 32
+    },
+    {
+      "id": 2,
+      "question": "With RANDOM_SEED 7, NUM_CLERKS 1, SIM_TIME 90, MEAN_INTERARRIVAL 5, and MEAN_SERVICE 8, what is the mean queue wait (minutes) among customers who reach a clerk? Round to two decimal places.",
+      "parameters": {
+        "RANDOM_SEED": 7,
+        "NUM_CLERKS": 1,
+        "SIM_TIME": 90.0,
+        "MEAN_INTERARRIVAL": 5.0,
+        "MEAN_SERVICE": 8.0
+      },
+      "answer": "30.97 minutes.",
+      "answer_numeric": 30.97
+    },
+    {
+      "id": 3,
+      "question": "With RANDOM_SEED 100, NUM_CLERKS 4, SIM_TIME 200, MEAN_INTERARRIVAL 3, and MEAN_SERVICE 5, what is the approximate clerk utilization as defined in the model notes? Give the value rounded to four decimal places.",
+      "parameters": {
+        "RANDOM_SEED": 100,
+        "NUM_CLERKS": 4,
+        "SIM_TIME": 200.0,
+        "MEAN_INTERARRIVAL": 3.0,
+        "MEAN_SERVICE": 5.0
+      },
+      "answer": "0.4281 (about 42.81% of aggregate clerk capacity).",
+      "answer_numeric": 0.4281
+    },
+    {
+      "id": 4,
+      "question": "With RANDOM_SEED 3, NUM_CLERKS 3, SIM_TIME 60, MEAN_INTERARRIVAL 10, and MEAN_SERVICE 4, what is the median queue wait (minutes) for customers who start service?",
+      "parameters": {
+        "RANDOM_SEED": 3,
+        "NUM_CLERKS": 3,
+        "SIM_TIME": 60.0,
+        "MEAN_INTERARRIVAL": 10.0,
+        "MEAN_SERVICE": 4.0
+      },
+      "answer": "0 minutes (no queuing in this run).",
+      "answer_numeric": 0.0
+    },
+    {
+      "id": 5,
+      "question": "With RANDOM_SEED 99, NUM_CLERKS 2, SIM_TIME 150, MEAN_INTERARRIVAL 2.5, and MEAN_SERVICE 7, what is the longest queue wait (minutes) observed? Round to two decimal places.",
+      "parameters": {
+        "RANDOM_SEED": 99,
+        "NUM_CLERKS": 2,
+        "SIM_TIME": 150.0,
+        "MEAN_INTERARRIVAL": 2.5,
+        "MEAN_SERVICE": 7.0
+      },
+      "answer": "70.81 minutes.",
+      "answer_numeric": 70.81
+    },
+    {
+      "id": 6,
+      "question": "With RANDOM_SEED 123, NUM_CLERKS 5, SIM_TIME 80, MEAN_INTERARRIVAL 6, and MEAN_SERVICE 3, how many customers begin service before SIM_TIME?",
+      "parameters": {
+        "RANDOM_SEED": 123,
+        "NUM_CLERKS": 5,
+        "SIM_TIME": 80.0,
+        "MEAN_INTERARRIVAL": 6.0,
+        "MEAN_SERVICE": 3.0
+      },
+      "answer": "20 customers begin service.",
+      "answer_numeric": 20
+    }
+  ],
+  "verification": "Numeric answers were produced by running the same SimPy logic as main.py with the listed seeds and parameters (Python 3, simpy in .venv)."
+}

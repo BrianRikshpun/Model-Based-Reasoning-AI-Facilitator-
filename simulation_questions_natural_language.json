@@ -1,0 +1,85 @@
+{
+  "title": "SimPy queue simulation — prose-style questions",
+  "introduction": "Each scenario matches the simple queue model in main.py: Poisson-style arrivals (exponential gaps), exponential service times, a fixed number of parallel clerks, and a fixed stopping time. A customer is counted once they reach a clerk. Utilization means: add up every sampled service length for those customers, then divide by (number of clerks × length of the run).",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Picture a small service counter with two clerks working side by side. You watch for exactly two hours. Customers trickle in unpredictably, but on average about four minutes pass between one arrival and the next. When someone is helped, the time it takes is random too, with an average length of six minutes. For grading we freeze luck: imagine the computer’s randomness is wired so this exact story always plays out the same way (seed 42). When the two hours are up, how many customers have actually started being helped—not counting anyone still standing in line?",
+      "parameters": {
+        "RANDOM_SEED": 42,
+        "NUM_CLERKS": 2,
+        "SIM_TIME": 120.0,
+        "MEAN_INTERARRIVAL": 4.0,
+        "MEAN_SERVICE": 6.0
+      },
+      "answer": "32 customers have started service by the end of the run.",
+      "answer_numeric": 32
+    },
+    {
+      "id": 2,
+      "question": "Now there is only one clerk on duty, and you stop the clock after ninety minutes. People still arrive in a memoryless, bursty way: the gaps between arrivals average five minutes. Service is also random, averaging eight minutes per customer. Again we use a fixed random stream so everyone gets the same outcome (seed 7). Among customers who eventually reach the clerk, what is their average wait from arrival until service begins? Express the answer in minutes and round to two decimal places.",
+      "parameters": {
+        "RANDOM_SEED": 7,
+        "NUM_CLERKS": 1,
+        "SIM_TIME": 90.0,
+        "MEAN_INTERARRIVAL": 5.0,
+        "MEAN_SERVICE": 8.0
+      },
+      "answer": "About 30.97 minutes on average.",
+      "answer_numeric": 30.97
+    },
+    {
+      "id": 3,
+      "question": "A busier site opens four windows and runs for a little over three hours—two hundred minutes total. Customers keep coming fairly often: about three minutes between arrivals on average. Each interaction lasts a random time averaging five minutes. With the randomness pinned to seed 100, what fraction of the combined clerk time is “accounted for” by the usual rule: total of all sampled service lengths divided by four clerks times two hundred minutes? Give a decimal rounded to four places.",
+      "parameters": {
+        "RANDOM_SEED": 100,
+        "NUM_CLERKS": 4,
+        "SIM_TIME": 200.0,
+        "MEAN_INTERARRIVAL": 3.0,
+        "MEAN_SERVICE": 5.0
+      },
+      "answer": "0.4281, i.e. roughly 42.8% of the pooled clerk capacity in that accounting.",
+      "answer_numeric": 0.4281
+    },
+    {
+      "id": 4,
+      "question": "Three clerks share a quiet hour-long shift—sixty minutes flat. Arrivals are sparse: about ten minutes between customers on average. When someone is served, the time averages four minutes. Using seed 3, nobody ends up waiting in this particular run. Stated more carefully: among people who start service, what is the median time they waited in line before a clerk became free?",
+      "parameters": {
+        "RANDOM_SEED": 3,
+        "NUM_CLERKS": 3,
+        "SIM_TIME": 60.0,
+        "MEAN_INTERARRIVAL": 10.0,
+        "MEAN_SERVICE": 4.0
+      },
+      "answer": "Zero minutes—the middle wait time is 0.",
+      "answer_numeric": 0.0
+    },
+    {
+      "id": 5,
+      "question": "Things get congested: two clerks, two and a half hours on the clock (150 minutes), arrivals roughly every two and a half minutes on average, and service averaging seven minutes. Seed 99 fixes the random draws. In this stressful spell, what is the longest wait—from walking in the door to the moment service starts—that any customer who gets served experiences? Answer in minutes, rounded to two decimals.",
+      "parameters": {
+        "RANDOM_SEED": 99,
+        "NUM_CLERKS": 2,
+        "SIM_TIME": 150.0,
+        "MEAN_INTERARRIVAL": 2.5,
+        "MEAN_SERVICE": 7.0
+      },
+      "answer": "About 70.81 minutes at the worst for someone who still got served.",
+      "answer_numeric": 70.81
+    },
+    {
+      "id": 6,
+      "question": "A large lobby runs five desks for eighty minutes. Customers appear on average every six minutes, and each visit lasts about three minutes on average once it starts. With seed 123 locking the randomness, how many customers have crossed the threshold and begun service before time is called?",
+      "parameters": {
+        "RANDOM_SEED": 123,
+        "NUM_CLERKS": 5,
+        "SIM_TIME": 80.0,
+        "MEAN_INTERARRIVAL": 6.0,
+        "MEAN_SERVICE": 3.0
+      },
+      "answer": "Twenty customers start service within the window.",
+      "answer_numeric": 20
+    }
+  ],
+  "verification": "Answers match simulation_questions.json and main.py logic; parameters are identical per question id."
+}
