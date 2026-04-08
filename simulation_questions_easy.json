@@ -1,5 +1,6 @@
 {
-  "title": "SimPy queue simulation — prose-style questions",
+  "title": "SimPy queue simulation — easy (single-scenario) questions",
+  "difficulty": "easy",
   "introduction": "Each scenario matches the simple queue model in main.py: Poisson-style arrivals (exponential gaps), exponential service times, a fixed number of parallel clerks, and a fixed stopping time. A customer is counted once they reach a clerk. Utilization means: add up every sampled service length for those customers, then divide by (number of clerks × length of the run).",
   "questions": [
     {
@@ -81,5 +82,5 @@
       "answer_numeric": 20
     }
   ],
-  "verification": "Answers match simulation_questions.json and main.py logic; parameters are identical per question id."
+  "verification": "Answers match simulation_questions.json and queue_simulation.py; parameters are identical per question id."
 }
