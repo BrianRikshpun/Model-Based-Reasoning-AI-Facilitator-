@@ -1,0 +1,347 @@
+{
+  "title": "SimPy queue simulation — comparison (multi-scenario) questions",
+  "difficulty": "comparison",
+  "introduction": "Same model as main.py and queue_simulation.py: exponential gaps between arrivals (mean = MEAN_INTERARRIVAL minutes), exponential service (mean = MEAN_SERVICE minutes), NUM_CLERKS parallel clerks, stop at SIM_TIME minutes, RNG fixed by RANDOM_SEED. A customer is counted when they start service. Utilization = sum of sampled service lengths for those customers ÷ (NUM_CLERKS × SIM_TIME). Each lettered scenario is an independent run with its own seed and parameters. Pick the scenario that best meets the stated goal.",
+  "questions": [
+    {
+      "id": 1,
+      "question": "You must staff a counter for 100 minutes. Arrivals average one every 3 minutes and service averages 5 minutes. Three budget options share the same randomness story except for headcount: Scenario A uses 1 clerk, B uses 2, C uses 3 (seeds 50 for each run as specified in the data). After simulating all three, which scenario minimizes the average time customers wait in line before service begins?",
+      "scenarios": {
+        "A": {
+          "RANDOM_SEED": 50,
+          "NUM_CLERKS": 1,
+          "SIM_TIME": 100.0,
+          "MEAN_INTERARRIVAL": 3.0,
+          "MEAN_SERVICE": 5.0
+        },
+        "B": {
+          "RANDOM_SEED": 50,
+          "NUM_CLERKS": 2,
+          "SIM_TIME": 100.0,
+          "MEAN_INTERARRIVAL": 3.0,
+          "MEAN_SERVICE": 5.0
+        },
+        "C": {
+          "RANDOM_SEED": 50,
+          "NUM_CLERKS": 3,
+          "SIM_TIME": 100.0,
+          "MEAN_INTERARRIVAL": 3.0,
+          "MEAN_SERVICE": 5.0
+        }
+      },
+      "criterion": {
+        "objective": "minimize",
+        "metric": "mean_wait"
+      },
+      "best_scenario": "C",
+      "answer": "Scenario C has the lowest average queue wait.",
+      "metrics_by_scenario": {
+        "A": {
+          "customers_started": 16,
+          "mean_wait": 18.8652,
+          "median_wait": 23.1771,
+          "max_wait": 38.8524,
+          "utilization": 0.9852
+        },
+        "B": {
+          "customers_started": 27,
+          "mean_wait": 2.7075,
+          "median_wait": 0.0,
+          "max_wait": 12.3725,
+          "utilization": 0.7462
+        },
+        "C": {
+          "customers_started": 25,
+          "mean_wait": 0.3257,
+          "median_wait": 0.0,
+          "max_wait": 3.7182,
+          "utilization": 0.4492
+        }
+      }
+    },
+    {
+      "id": 2,
+      "question": "A rush lasts 120 minutes with tight arrivals (mean gap 2.5 minutes) and long visits (mean service 7 minutes). You can open 2, 3, or 4 windows—scenarios A, B, and C—with seeds 51, 51, 51 respectively. Which design keeps the worst customer wait (among those who eventually start service) as small as possible?",
+      "scenarios": {
+        "A": {
+          "RANDOM_SEED": 51,
+          "NUM_CLERKS": 2,
+          "SIM_TIME": 120.0,
+          "MEAN_INTERARRIVAL": 2.5,
+          "MEAN_SERVICE": 7.0
+        },
+        "B": {
+          "RANDOM_SEED": 51,
+          "NUM_CLERKS": 3,
+          "SIM_TIME": 120.0,
+          "MEAN_INTERARRIVAL": 2.5,
+          "MEAN_SERVICE": 7.0
+        },
+        "C": {
+          "RANDOM_SEED": 51,
+          "NUM_CLERKS": 4,
+          "SIM_TIME": 120.0,
+          "MEAN_INTERARRIVAL": 2.5,
+          "MEAN_SERVICE": 7.0
+        }
+      },
+      "criterion": {
+        "objective": "minimize",
+        "metric": "max_wait"
+      },
+      "best_scenario": "B",
+      "answer": "Scenario B minimizes the maximum queue wait.",
+      "metrics_by_scenario": {
+        "A": {
+          "customers_started": 24,
+          "mean_wait": 30.501,
+          "median_wait": 40.693,
+          "max_wait": 46.8131,
+          "utilization": 0.9614
+        },
+        "B": {
+          "customers_started": 30,
+          "mean_wait": 1.2334,
+          "median_wait": 0.0,
+          "max_wait": 8.1024,
+          "utilization": 0.7493
+        },
+        "C": {
+          "customers_started": 39,
+          "mean_wait": 4.6017,
+          "median_wait": 1.5234,
+          "max_wait": 15.2806,
+          "utilization": 0.8579
+        }
+      }
+    },
+    {
+      "id": 3,
+      "question": "Over an 80-minute window, mean service is 4 minutes for all cases. Scenario A is a calm site: mean 8 minutes between arrivals and 2 clerks (seed 60). Scenario B doubles arrival intensity: mean 4 minutes between arrivals, still 2 clerks (seed 61). Scenario C matches B’s arrival rate but adds a third clerk (seed 62). Which scenario completes the largest number of customers starting service before time runs out?",
+      "scenarios": {
+        "A": {
+          "RANDOM_SEED": 60,
+          "NUM_CLERKS": 2,
+          "SIM_TIME": 80.0,
+          "MEAN_INTERARRIVAL": 8.0,
+          "MEAN_SERVICE": 4.0
+        },
+        "B": {
+          "RANDOM_SEED": 61,
+          "NUM_CLERKS": 2,
+          "SIM_TIME": 80.0,
+          "MEAN_INTERARRIVAL": 4.0,
+          "MEAN_SERVICE": 4.0
+        },
+        "C": {
+          "RANDOM_SEED": 62,
+          "NUM_CLERKS": 3,
+          "SIM_TIME": 80.0,
+          "MEAN_INTERARRIVAL": 4.0,
+          "MEAN_SERVICE": 4.0
+        }
+      },
+      "criterion": {
+        "objective": "maximize",
+        "metric": "customers_started"
+      },
+      "best_scenario": "C",
+      "answer": "Scenario C starts the most customers within 80 minutes.",
+      "metrics_by_scenario": {
+        "A": {
+          "customers_started": 10,
+          "mean_wait": 0.0,
+          "median_wait": 0.0,
+          "max_wait": 0.0,
+          "utilization": 0.1888
+        },
+        "B": {
+          "customers_started": 21,
+          "mean_wait": 0.2388,
+          "median_wait": 0.0,
+          "max_wait": 2.0999,
+          "utilization": 0.549
+        },
+        "C": {
+          "customers_started": 22,
+          "mean_wait": 0.0,
+          "median_wait": 0.0,
+          "max_wait": 0.0,
+          "utilization": 0.4058
+        }
+      }
+    },
+    {
+      "id": 4,
+      "question": "Traffic is light: mean 15 minutes between arrivals and mean service 5 minutes for 60 minutes on the clock. You are asked which staffing level leaves clerks idle the most (lowest utilization in the model’s sense). A runs 4 clerks (seed 70), B runs 3 (seed 71), C runs 2 (seed 72). Which scenario is best by that measure?",
+      "scenarios": {
+        "A": {
+          "RANDOM_SEED": 70,
+          "NUM_CLERKS": 4,
+          "SIM_TIME": 60.0,
+          "MEAN_INTERARRIVAL": 15.0,
+          "MEAN_SERVICE": 5.0
+        },
+        "B": {
+          "RANDOM_SEED": 71,
+          "NUM_CLERKS": 3,
+          "SIM_TIME": 60.0,
+          "MEAN_INTERARRIVAL": 15.0,
+          "MEAN_SERVICE": 5.0
+        },
+        "C": {
+          "RANDOM_SEED": 72,
+          "NUM_CLERKS": 2,
+          "SIM_TIME": 60.0,
+          "MEAN_INTERARRIVAL": 15.0,
+          "MEAN_SERVICE": 5.0
+        }
+      },
+      "criterion": {
+        "objective": "minimize",
+        "metric": "utilization"
+      },
+      "best_scenario": "B",
+      "answer": "Scenario B has the lowest clerk utilization (most idle capacity).",
+      "metrics_by_scenario": {
+        "A": {
+          "customers_started": 5,
+          "mean_wait": 0.0,
+          "median_wait": 0.0,
+          "max_wait": 0.0,
+          "utilization": 0.1829
+        },
+        "B": {
+          "customers_started": 2,
+          "mean_wait": 0.0,
+          "median_wait": 0.0,
+          "max_wait": 0.0,
+          "utilization": 0.0482
+        },
+        "C": {
+          "customers_started": 5,
+          "mean_wait": 0.0,
+          "median_wait": 0.0,
+          "max_wait": 0.0,
+          "utilization": 0.367
+        }
+      }
+    },
+    {
+      "id": 5,
+      "question": "For 100 minutes, arrivals are aggressive (mean gap 2 minutes) and service averages 6 minutes. Compare 2, 3, and 4 clerks—scenarios A, B, and C—all using seed 85. Which scenario yields the smallest median wait among customers who begin service?",
+      "scenarios": {
+        "A": {
+          "RANDOM_SEED": 85,
+          "NUM_CLERKS": 2,
+          "SIM_TIME": 100.0,
+          "MEAN_INTERARRIVAL": 2.0,
+          "MEAN_SERVICE": 6.0
+        },
+        "B": {
+          "RANDOM_SEED": 85,
+          "NUM_CLERKS": 3,
+          "SIM_TIME": 100.0,
+          "MEAN_INTERARRIVAL": 2.0,
+          "MEAN_SERVICE": 6.0
+        },
+        "C": {
+          "RANDOM_SEED": 85,
+          "NUM_CLERKS": 4,
+          "SIM_TIME": 100.0,
+          "MEAN_INTERARRIVAL": 2.0,
+          "MEAN_SERVICE": 6.0
+        }
+      },
+      "criterion": {
+        "objective": "minimize",
+        "metric": "median_wait"
+      },
+      "best_scenario": "C",
+      "answer": "Scenario C achieves the lowest median queue wait (zero in this run).",
+      "metrics_by_scenario": {
+        "A": {
+          "customers_started": 29,
+          "mean_wait": 12.0855,
+          "median_wait": 4.9626,
+          "max_wait": 46.6625,
+          "utilization": 0.9798
+        },
+        "B": {
+          "customers_started": 42,
+          "mean_wait": 2.642,
+          "median_wait": 1.3384,
+          "max_wait": 12.5879,
+          "utilization": 0.8885
+        },
+        "C": {
+          "customers_started": 43,
+          "mean_wait": 0.2762,
+          "median_wait": 0.0,
+          "max_wait": 2.7638,
+          "utilization": 0.6031
+        }
+      }
+    },
+    {
+      "id": 6,
+      "question": "Leadership wants at least 22 customers to begin service within 100 minutes when mean interarrival time is 3 minutes and mean service is 5 minutes. Scenario A uses 2 clerks (seed 90), B uses 2 clerks with a different draw sequence (seed 91), and C uses 3 clerks (seed 92). Among only the scenarios that satisfy the 22-customer floor, which minimizes average queue wait? If several qualify, pick the one with the lowest mean wait.",
+      "scenarios": {
+        "A": {
+          "RANDOM_SEED": 90,
+          "NUM_CLERKS": 2,
+          "SIM_TIME": 100.0,
+          "MEAN_INTERARRIVAL": 3.0,
+          "MEAN_SERVICE": 5.0
+        },
+        "B": {
+          "RANDOM_SEED": 91,
+          "NUM_CLERKS": 2,
+          "SIM_TIME": 100.0,
+          "MEAN_INTERARRIVAL": 3.0,
+          "MEAN_SERVICE": 5.0
+        },
+        "C": {
+          "RANDOM_SEED": 92,
+          "NUM_CLERKS": 3,
+          "SIM_TIME": 100.0,
+          "MEAN_INTERARRIVAL": 3.0,
+          "MEAN_SERVICE": 5.0
+        }
+      },
+      "criterion": {
+        "objective": "minimize",
+        "metric": "mean_wait",
+        "subject_to": {
+          "customers_started_gte": 22
+        }
+      },
+      "best_scenario": "C",
+      "answer": "A, B, and C all reach at least 22 starters; scenario C has the lowest average wait among them.",
+      "metrics_by_scenario": {
+        "A": {
+          "customers_started": 33,
+          "mean_wait": 7.2299,
+          "median_wait": 5.453,
+          "max_wait": 22.2986,
+          "utilization": 0.9348
+        },
+        "B": {
+          "customers_started": 26,
+          "mean_wait": 11.3886,
+          "median_wait": 13.2699,
+          "max_wait": 25.7916,
+          "utilization": 0.9251
+        },
+        "C": {
+          "customers_started": 22,
+          "mean_wait": 0.0716,
+          "median_wait": 0.0,
+          "max_wait": 1.1274,
+          "utilization": 0.3623
+        }
+      }
+    }
+  ],
+  "verification": "best_scenario and metrics_by_scenario were computed with queue_simulation.run_simulation for each lettered parameter set."
+}

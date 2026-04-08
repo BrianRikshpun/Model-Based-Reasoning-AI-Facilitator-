@@ -1,5 +1,6 @@
 {
-  "title": "SimPy queue simulation — verified Q&A",
+  "title": "SimPy queue simulation — easy (single-scenario, technical wording)",
+  "difficulty": "easy",
   "model_notes": "Exponential interarrivals and service times; Resource capacity = clerks. Metrics match main.py: a customer is counted once they acquire a clerk (wait time ends). Utilization = sum of sampled service durations for those customers / (NUM_CLERKS * SIM_TIME).",
   "questions": [
     {
@@ -81,5 +82,5 @@
       "answer_numeric": 20
     }
   ],
-  "verification": "Numeric answers were produced by running the same SimPy logic as main.py with the listed seeds and parameters (Python 3, simpy in .venv)."
+  "verification": "Numeric answers match queue_simulation.py; prose twin is simulation_questions_easy.json."
 }
